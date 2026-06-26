@@ -30,6 +30,10 @@
         };
         config = lib.mkIf config.programs.halley.enable {
           environment.systemPackages = [ config.programs.halley.package ];
+
+          # Portal config: prefer Halley for ScreenCast/Screenshot, GTK for the rest
+          environment.etc."xdg/xdg-desktop-portal/halley-portals.conf".source =
+            "${config.programs.halley.package}/share/xdg-desktop-portal/halley-portals.conf";
         };
       };
     in flake-utils.lib.eachDefaultSystem (
@@ -98,6 +102,7 @@
               substituteInPlace $out/bin/halley-session \
                 --replace-fail '/usr/bin/halley' "$out/bin/halley"
 
+
               # Portal backend config
               if [ -d "$src/packaging/xdg-desktop-portal" ]; then
                 mkdir -p $out/share/xdg-desktop-portal/portals
@@ -112,6 +117,8 @@
                 mkdir -p $out/share/dbus-1/services
                 cp -t $out/share/dbus-1/services \
                   $src/packaging/dbus-1/services/*.service
+                substituteInPlace $out/share/dbus-1/services/*.service \
+                  --replace-fail '/usr/bin/' "$out/bin/"
               fi
 
               # systemd user units

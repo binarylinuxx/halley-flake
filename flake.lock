@@ -1,0 +1,96 @@
+{
+  "nodes": {
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "halley-stable-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781276861,
+        "narHash": "sha256-XKsRE46OZPMl70Uw2biSDg8xvHh5pZNIJlObrgiowso=",
+        "owner": "saltnpepper97",
+        "repo": "halley",
+        "rev": "34cbb6b979e68b46f8ec5dc47d7514b6f3d75edb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "saltnpepper97",
+        "ref": "v0.4.0",
+        "repo": "halley",
+        "type": "github"
+      }
+    },
+    "halley-unstable-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782323323,
+        "narHash": "sha256-SWmYk80xhndOFV1FeO5MkTux6B/h6hOvaTC93fRPnUk=",
+        "owner": "saltnpepper97",
+        "repo": "halley",
+        "rev": "9eb2808b35fa7fcd2a69ea53996b3025f0e85d8e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "saltnpepper97",
+        "repo": "halley",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1782467914,
+        "narHash": "sha256-pGvFkM8N0xEkIIXDe5YYfbEAvHrk4IxBrjB/x8OomhE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e73de5be04e0eff4190a1432b946d469c794e7b4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "halley-stable-src": "halley-stable-src",
+        "halley-unstable-src": "halley-unstable-src",
+        "nixpkgs": "nixpkgs"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
