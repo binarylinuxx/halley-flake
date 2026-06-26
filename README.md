@@ -24,3 +24,34 @@ nix build .#default            # same as unstable
 | `halley-unstable` | main branch | + xdg-desktop-portal-halley |
 
 Both install session files, systemd units, portal config, and D-Bus services.
+
+## Install
+
+### NixOS (flake)
+
+```nix
+{
+  inputs.halley.url = "github:binarylinuxx/halley-flake";
+
+  outputs = { self, nixpkgs, halley, ... }: {
+    nixosConfigurations.mybox = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ({ config, pkgs, ... }: {
+          environment.systemPackages = [
+            halley.packages.${pkgs.system}.halley-unstable
+          ];
+        })
+      ];
+    };
+  };
+}
+```
+
+### User profile (non-NixOS)
+
+```bash
+nix profile install github:binarylinuxx/halley-flake#halley-unstable
+```
+
+After installation, select **Halley** from your display manager session list, or run `halley-session` from a TTY.
