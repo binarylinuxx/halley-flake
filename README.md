@@ -6,7 +6,7 @@ Nix flake for [Halley](https://github.com/saltnpepper97/halley) — spatial Wayl
 
 ```nix
 {
-  inputs.halley.url = "github:your-user/halley-flake";
+  inputs.halley.url = "github:binarylinuxx/halley-flake";
 }
 ```
 
