@@ -37,11 +37,13 @@ Both install session files, systemd units, portal config, and D-Bus services.
     nixosConfigurations.mybox = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ({ config, pkgs, ... }: {
-          environment.systemPackages = [
-            halley.packages.${pkgs.system}.halley-unstable
-          ];
-        })
+        halley.nixosModules.default
+        {
+          programs.halley = {
+            enable = true;
+            package = halley.packages.${pkgs.system}.halley-unstable; # optional, defaults to unstable
+          };
+        }
       ];
     };
   };

@@ -16,7 +16,23 @@
 
   outputs =
     { self, nixpkgs, flake-utils, halley-stable-src, halley-unstable-src }:
-    flake-utils.lib.eachDefaultSystem (
+    let
+      nixosModule = { pkgs, lib, config, ... }: let
+        halleyPkgs = self.packages.${pkgs.system};
+      in {
+        options.programs.halley = {
+          enable = lib.mkEnableOption "Halley Wayland compositor";
+          package = lib.mkOption {
+            type = lib.types.package;
+            default = halleyPkgs.halley-unstable;
+            description = "Halley package to use";
+          };
+        };
+        config = lib.mkIf config.programs.halley.enable {
+          environment.systemPackages = [ config.programs.halley.package ];
+        };
+      };
+    in flake-utils.lib.eachDefaultSystem (
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -184,5 +200,7 @@
           '';
         };
       }
-    );
+    ) // {
+      nixosModules.default = nixosModule;
+    };
 }
