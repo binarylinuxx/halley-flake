@@ -9,7 +9,7 @@
       flake = false;
     };
     halley-unstable-src = {
-      url = "github:binarylinuxx/halley/fix-drm-syncobj-blocker-wakeup";
+      url = "github:saltnpepper97/halley";
       flake = false;
     };
   };
