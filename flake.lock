@@ -38,15 +38,16 @@
     "halley-unstable-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1782323323,
-        "narHash": "sha256-SWmYk80xhndOFV1FeO5MkTux6B/h6hOvaTC93fRPnUk=",
-        "owner": "saltnpepper97",
+        "lastModified": 1782579889,
+        "narHash": "sha256-sEQETESLPQpIPo4gr3kjbL/yVyR+SeMtk4HJB/nBzUc=",
+        "owner": "binarylinuxx",
         "repo": "halley",
-        "rev": "9eb2808b35fa7fcd2a69ea53996b3025f0e85d8e",
+        "rev": "c71339f157db83f9035b09cde59a58d3d0698faf",
         "type": "github"
       },
       "original": {
-        "owner": "saltnpepper97",
+        "owner": "binarylinuxx",
+        "ref": "fix-drm-syncobj-blocker-wakeup",
         "repo": "halley",
         "type": "github"
       }
