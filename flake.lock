@@ -35,19 +35,36 @@
         "type": "github"
       }
     },
-    "halley-unstable-src": {
+    "halley-unstable-dev-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1782644632,
-        "narHash": "sha256-xPYKorN14JHwABouL12sU0HClKIszxZ6pg9N5h6YKD4=",
-        "owner": "binarylinuxx",
+        "lastModified": 1782654736,
+        "narHash": "sha256-S1mt5Yw/kDjqG5hZbtCv91vJ6bWSVqfsRp1C1ODS4r0=",
+        "owner": "saltnpepper97",
         "repo": "halley",
-        "rev": "e300068a2f8df2bbe4b403e754771d33c1a9d2ba",
+        "rev": "b1b994af2c7f6b7c4127c0357d9af7c2038dcf85",
         "type": "github"
       },
       "original": {
-        "owner": "binarylinuxx",
-        "ref": "fix-layer-input-client-maximize",
+        "owner": "saltnpepper97",
+        "ref": "dev",
+        "repo": "halley",
+        "type": "github"
+      }
+    },
+    "halley-unstable-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782614360,
+        "narHash": "sha256-9t3SdqAf4E1wIR7cPwprSmDymXnHEnq4/JRfO2YXhVY=",
+        "owner": "saltnpepper97",
+        "repo": "halley",
+        "rev": "f282c34e6fe57ae6f7f9131cd44e7da3897f8ca2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "saltnpepper97",
+        "ref": "main",
         "repo": "halley",
         "type": "github"
       }
@@ -72,6 +89,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "halley-stable-src": "halley-stable-src",
+        "halley-unstable-dev-src": "halley-unstable-dev-src",
         "halley-unstable-src": "halley-unstable-src",
         "nixpkgs": "nixpkgs"
       }

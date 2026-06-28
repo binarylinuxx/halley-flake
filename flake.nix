@@ -9,13 +9,17 @@
       flake = false;
     };
     halley-unstable-src = {
-      url = "github:binarylinuxx/halley/fix-layer-input-client-maximize";
+      url = "github:saltnpepper97/halley/main";
+      flake = false;
+    };
+    halley-unstable-dev-src = {
+      url = "github:saltnpepper97/halley/dev";
       flake = false;
     };
   };
 
   outputs =
-    { self, nixpkgs, flake-utils, halley-stable-src, halley-unstable-src }:
+    { self, nixpkgs, flake-utils, halley-stable-src, halley-unstable-src, halley-unstable-dev-src }:
     let
       nixosModule = { pkgs, lib, config, ... }: let
         halleyPkgs = self.packages.${pkgs.system};
@@ -175,6 +179,32 @@
             meta = with pkgs.lib; {
               description =
                 "Spatial Wayland compositor (unstable/git) built around infinite workspace navigation";
+              homepage = "https://github.com/saltnpepper97/halley";
+              license = licenses.gpl3Only;
+              platforms = platforms.linux;
+              maintainers = [ ];
+              mainProgram = "halley";
+            };
+          };
+
+          halley-unstable-dev = mkHalley {
+            pname = "halley";
+            version = "0.5.0-dev";
+            src = halley-unstable-dev-src;
+            cargoLock = {
+              lockFile = halley-unstable-dev-src + "/Cargo.lock";
+              outputHashes = {
+                "smithay-0.7.0" =
+                  "sha256-TV/GTfSvgfVwIFUGoASU7xm38opIBLjLMf1HeNTW07U=";
+              };
+            };
+            extraBuildInputs = with pkgs; [ pipewire dbus ];
+            doCheck = false;
+            runtimeLibs = with pkgs; [ libglvnd libgbm mesa wayland pipewire dbus ];
+            extraNativeBuildInputs = [ ];
+            meta = with pkgs.lib; {
+              description =
+                "Spatial Wayland compositor (dev branch) built around infinite workspace navigation";
               homepage = "https://github.com/saltnpepper97/halley";
               license = licenses.gpl3Only;
               platforms = platforms.linux;
