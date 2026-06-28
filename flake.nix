@@ -170,7 +170,7 @@
             };
             extraBuildInputs = with pkgs; [ pipewire dbus ];
             doCheck = false;
-            runtimeLibs = with pkgs; [ libglvnd libgbm mesa pipewire dbus ];
+            runtimeLibs = with pkgs; [ libglvnd libgbm mesa wayland pipewire dbus ];
             extraNativeBuildInputs = [ ];
             meta = with pkgs.lib; {
               description =
