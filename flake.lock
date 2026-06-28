@@ -38,11 +38,11 @@
     "halley-unstable-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1782323323,
-        "narHash": "sha256-SWmYk80xhndOFV1FeO5MkTux6B/h6hOvaTC93fRPnUk=",
+        "lastModified": 1782614360,
+        "narHash": "sha256-9t3SdqAf4E1wIR7cPwprSmDymXnHEnq4/JRfO2YXhVY=",
         "owner": "saltnpepper97",
         "repo": "halley",
-        "rev": "9eb2808b35fa7fcd2a69ea53996b3025f0e85d8e",
+        "rev": "f282c34e6fe57ae6f7f9131cd44e7da3897f8ca2",
         "type": "github"
       },
       "original": {
