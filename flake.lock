@@ -38,11 +38,11 @@
     "halley-unstable-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1782643027,
-        "narHash": "sha256-jdaUKGXsOQW0DRnUpKMzv8Myg844uPSmeTOeWPv9zns=",
+        "lastModified": 1782644632,
+        "narHash": "sha256-xPYKorN14JHwABouL12sU0HClKIszxZ6pg9N5h6YKD4=",
         "owner": "binarylinuxx",
         "repo": "halley",
-        "rev": "f20b14d901b86995e460a6707a41027d05ff84de",
+        "rev": "e300068a2f8df2bbe4b403e754771d33c1a9d2ba",
         "type": "github"
       },
       "original": {
