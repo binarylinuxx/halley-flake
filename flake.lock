@@ -38,15 +38,16 @@
     "halley-unstable-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1782614360,
-        "narHash": "sha256-9t3SdqAf4E1wIR7cPwprSmDymXnHEnq4/JRfO2YXhVY=",
-        "owner": "saltnpepper97",
+        "lastModified": 1782637466,
+        "narHash": "sha256-+YXZrEwrC/CffkJVhprHhzgo92+UnL1r6amY79A4SpU=",
+        "owner": "binarylinuxx",
         "repo": "halley",
-        "rev": "f282c34e6fe57ae6f7f9131cd44e7da3897f8ca2",
+        "rev": "b372aeb231ae2546e0df251589f91cf72f02706e",
         "type": "github"
       },
       "original": {
-        "owner": "saltnpepper97",
+        "owner": "binarylinuxx",
+        "ref": "fix-layer-input-client-maximize",
         "repo": "halley",
         "type": "github"
       }

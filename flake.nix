@@ -9,7 +9,7 @@
       flake = false;
     };
     halley-unstable-src = {
-      url = "github:saltnpepper97/halley";
+      url = "github:binarylinuxx/halley/fix-layer-input-client-maximize";
       flake = false;
     };
   };
