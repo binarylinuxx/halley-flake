@@ -57,3 +57,6 @@ nix profile install github:binarylinuxx/halley-flake#halley-unstable
 ```
 
 After installation, select **Halley** from your display manager session list, or run `halley-session` from a TTY.
+
+> [!NOTE]
+> The unstable and dev packages are recommended for users who want the latest fixes, since Halley currently moves fast and releases may lag behind those fixes. 

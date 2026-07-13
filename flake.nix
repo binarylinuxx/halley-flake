@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     halley-stable-src = {
-      url = "github:saltnpepper97/halley/v0.4.0";
+      url = "github:saltnpepper97/halley/v0.5.0";
       flake = false;
     };
     halley-unstable-src = {
