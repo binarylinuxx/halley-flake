@@ -174,6 +174,8 @@
                 substituteInPlace "$out/lib/systemd/user/halley.service" \
                   --replace-fail "/usr/bin/halley" "$out/bin/halley"
               '';
+
+            passthru.providedSessions = [ "halley" ];
           };
       in
       {
