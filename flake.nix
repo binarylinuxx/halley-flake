@@ -43,7 +43,8 @@
 
       isRawRune = value: builtins.isAttrs value && value ? __raw;
 
-      serializeRuneValue = value:
+      serializeRuneValue =
+        value:
         if builtins.isString value then
           "\"${escapeRuneString value}\""
         else if builtins.isBool value then
@@ -56,14 +57,24 @@
           toString value;
 
       serializeRuneName =
-        name: if nixpkgs.lib.strings.match "[A-Za-z][A-Za-z0-9-]*" name != null then name else serializeRuneValue name;
+        name:
+        if nixpkgs.lib.strings.match "[A-Za-z][A-Za-z0-9-]*" name != null then
+          name
+        else
+          serializeRuneValue name;
 
       serializeRuneEntry =
         indent: path: name: value:
         let
           renderedName = serializeRuneName name;
           isRepeatedDirective =
-            (path == [ "autostart" ] && builtins.elem name [ "once" "on-reload" ])
+            (
+              path == [ "autostart" ]
+              && builtins.elem name [
+                "once"
+                "on-reload"
+              ]
+            )
             || (path == [ ] && name == "gather")
             || path == [ "keybinds" ];
         in
@@ -74,7 +85,9 @@
         else if isRawRune value then
           "${indent}${renderedName} ${value.__raw}"
         else if builtins.isAttrs value then
-          "${indent}${renderedName}:\n${serializeRuneAttrs "${indent}  " (path ++ [ name ]) value}\n${indent}end"
+          "${indent}${renderedName}:\n${
+            serializeRuneAttrs "${indent}  " (path ++ [ name ]) value
+          }\n${indent}end"
         else if builtins.isList value && value != [ ] && builtins.all builtins.isAttrs value then
           nixpkgs.lib.concatMapStringsSep "\n" (entry: serializeRuneEntry indent path name entry) value
         else
@@ -105,9 +118,11 @@
             "rules"
             "viewport"
           ];
-          isDynamic = path:
+          isDynamic =
+            path:
             builtins.any (dynamic: path == dynamic || nixpkgs.lib.hasPrefix "${dynamic}." path) dynamicPaths;
-          walk = path: value:
+          walk =
+            path: value:
             let
               fullPath = nixpkgs.lib.concatStringsSep "." path;
               canonicalPath =
@@ -122,9 +137,7 @@
               [ ]
             else if builtins.isAttrs value then
               (nixpkgs.lib.optional (path != [ ] && !knownSection && !isDynamic fullPath) fullPath)
-              ++ nixpkgs.lib.concatMap (
-                name: walk (path ++ [ name ]) value.${name}
-              ) (builtins.attrNames value)
+              ++ nixpkgs.lib.concatMap (name: walk (path ++ [ name ]) value.${name}) (builtins.attrNames value)
             else if builtins.isList value && value != [ ] && builtins.all builtins.isAttrs value then
               nixpkgs.lib.concatMap (entry: walk path entry) value
             else
@@ -234,7 +247,12 @@
         };
 
       homeModule =
-        { config, lib, pkgs, ... }:
+        {
+          config,
+          lib,
+          pkgs,
+          ...
+        }:
         let
           cfg = config.programs.halley;
           schema = schemas.${cfg.package.passthru.halleySchema or "unstable"};
@@ -385,9 +403,15 @@
                 substituteInPlace "$out/bin/halley-session" \
                   --replace-fail "/usr/bin/halley" "$out/bin/halley"
 
-                substituteInPlace "$out/share/wayland-sessions/halley.desktop" \
-                  --replace-fail "Exec=/usr/bin/halley-session" \
-                    "Exec=$out/bin/halley-session"
+                if grep -q "Exec=/usr/bin/halley-session" "$out/share/wayland-sessions/halley.desktop"; then
+                  substituteInPlace "$out/share/wayland-sessions/halley.desktop" \
+                    --replace-fail "TryExec=/usr/bin/halley-session" "TryExec=$out/bin/halley-session" \
+                    --replace-fail "Exec=/usr/bin/halley-session" "Exec=$out/bin/halley-session"
+                else
+                  substituteInPlace "$out/share/wayland-sessions/halley.desktop" \
+                    --replace-fail "TryExec=halley-session" "TryExec=$out/bin/halley-session" \
+                    --replace-fail "Exec=halley-session" "Exec=$out/bin/halley-session"
+                fi
 
                 install -Dm644 \
                   "$src/packaging/xdg-desktop-portal/portals/halley.portal" \
@@ -441,8 +465,7 @@
               lockFile = halley-stable-src + "/Cargo.lock";
 
               outputHashes = {
-                "smithay-0.7.0" =
-                  "sha256-TV/GTfSvgfVwIFUGoASU7xm38opIBLjLMf1HeNTW07U=";
+                "smithay-0.7.0" = "sha256-TV/GTfSvgfVwIFUGoASU7xm38opIBLjLMf1HeNTW07U=";
               };
             };
 
@@ -455,13 +478,19 @@
               libglvnd
               libgbm
               mesa
+              wayland
+              pipewire
+              dbus
+              seatd
+              libinput
+              libxkbcommon
+              systemd
             ];
 
             schemaName = "stable";
 
             meta = with pkgs.lib; {
-              description =
-                "Spatial Wayland compositor built around infinite workspace navigation";
+              description = "Spatial Wayland compositor built around infinite workspace navigation";
               homepage = "https://github.com/saltnpepper97/halley";
               license = licenses.gpl3Only;
               platforms = platforms.linux;
@@ -478,8 +507,7 @@
               lockFile = halley-unstable-src + "/Cargo.lock";
 
               outputHashes = {
-                "smithay-0.7.0" =
-                  "sha256-TV/GTfSvgfVwIFUGoASU7xm38opIBLjLMf1HeNTW07U=";
+                "smithay-0.7.0" = "sha256-TV/GTfSvgfVwIFUGoASU7xm38opIBLjLMf1HeNTW07U=";
               };
             };
 
@@ -495,13 +523,16 @@
               wayland
               pipewire
               dbus
+              seatd
+              libinput
+              libxkbcommon
+              systemd
             ];
 
             schemaName = "unstable";
 
             meta = with pkgs.lib; {
-              description =
-                "Spatial Wayland compositor from the main branch";
+              description = "Spatial Wayland compositor from the main branch";
               homepage = "https://github.com/saltnpepper97/halley";
               license = licenses.gpl3Only;
               platforms = platforms.linux;
@@ -518,8 +549,7 @@
               lockFile = halley-unstable-dev-src + "/Cargo.lock";
 
               outputHashes = {
-                "smithay-0.7.0" =
-                  "sha256-TV/GTfSvgfVwIFUGoASU7xm38opIBLjLMf1HeNTW07U=";
+                "smithay-0.7.0" = "sha256-TV/GTfSvgfVwIFUGoASU7xm38opIBLjLMf1HeNTW07U=";
               };
             };
 
@@ -535,13 +565,16 @@
               wayland
               pipewire
               dbus
+              seatd
+              libinput
+              libxkbcommon
+              systemd
             ];
 
             schemaName = "dev";
 
             meta = with pkgs.lib; {
-              description =
-                "Spatial Wayland compositor from the development branch";
+              description = "Spatial Wayland compositor from the development branch";
               homepage = "https://github.com/saltnpepper97/halley";
               license = licenses.gpl3Only;
               platforms = platforms.linux;
